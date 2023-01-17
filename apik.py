@@ -201,7 +201,7 @@ if __name__=='__main__':
             but6.pack()
             atfr.destroy()
             root.geometry('300x250')
-            print('czesc')
+
 
         at2 = partial(at1, entryokres)
         ZatAna = Button(atfr, text='Zatwierdź', command=at2)
