@@ -6,6 +6,7 @@ if __name__=='__main__':
     import scraps
     import google
     import pandas as pd
+    import matplotlib_inline
 
 
 
@@ -200,6 +201,18 @@ if __name__=='__main__':
             but6 = Button(ATframe, text="Analiza techniczna", command=at)
             but6.pack()
             atfr.destroy()
+            def getminutedata(symbol,interval, lookback):
+                frame = pd.DataFrame(client.get_historical_klines(symbol,interval,lookback))
+                frame = frame.iloc[:,:6]
+                frame.columns =['T','O','H','L','C','V']
+                frame = frame.set_index('T')
+                frame.index = pd.to_datetime(frame.index, unit='ms')
+                frame = frame.astype(float)
+                return frame
+            test = getminutedata('BTCUSDT','1d','1w')
+            test.plot()
+
+
             root.geometry('300x250')
 
 
