@@ -14,41 +14,46 @@ def getminutedata(symbol, interval, lookback):
     frame = pd.DataFrame(client.get_historical_klines(symbol , interval, lookback))
     frame = frame.iloc[:,:6]
     frame.columns = ['Time','Open','High','Low','Close','Volume']
-    frame = frame.set_index('Time')
-    frame.index = pd.to_datetime(frame.index, unit = 'ms')
+    frame = frame.set_index('Open')
+    # frame.index = pd.to_datetime(frame.index, unit = 'ms')
     frame = frame.astype(float)
     return frame
+test = getminutedata('BTCUSDT', '1h','1d')
 
-test = getminutedata('BTCUSDT', '1m','1d')
-# test1 = {'col1': ['1674422959', '1674682222'], 'col2': [22424, 22374]}
-# df = pd.DataFrame(data=test1)
-# df = df.set_index('col1')
-# df.index = pd.to_datetime(df.index, unit = 's')
-# plt.plot(test.get('Open'))
-# plt.plot(df.get('col2'))
-# plt.show()
+pd.set_option('display.max_rows', None)
 
-
-# np.random.seed(0)
-# rs = np.random.randn(200)
-# xs = [0]
-# for r in rs:
-#     xs.append(xs[-1] * 0.9 + r)
-# df = pd.DataFrame(xs, columns=['data'])
-
-n = 5  # number of points to be checked before and after
+n = 1  # number of points to be checked before and after
 
 # Find local peaks
+test['min'] = test.iloc[argrelextrema(test.Close.values, np.less_equal,order=n)[0]]['Close']
+test['max'] = test.iloc[argrelextrema(test.Close.values, np.greater_equal,order=n)[0]]['Close']
 
-test['min'] = test.iloc[argrelextrema(test.Open.values, np.less_equal,order=n)[0]]['Open']
-test['max'] = test.iloc[argrelextrema(test.Open.values, np.greater_equal,order=n)[0]]['Open']
-
+print(type(int(test['Volume']['22895.82000000'])))
+x = []
+# pobrac minima z test[min] i zapisac je do array y nizej, a do array x zapisac liczby
+# czasowe i sie wyswietli linia wsparcia
 # Plot results
 
 plt.scatter(test.index, test['min'], c='r')
 plt.scatter(test.index, test['max'], c='g')
-plt.plot(test.get('Open'))
+plt.plot(test.get('Close'))
 plt.show()
 
+from scipy.stats import linregress
 
+x = np.array([2, 7,8,9,10])
+y = np.array([5, 6,7,8,15])
+slope, intercept, r_value, p_value, std_err = linregress(x, y)
+print("slope: %f, intercept: %f" % (slope, intercept))
+print("R-squared: %f" % r_value ** 2)
+# slope =  2.000000
+# intercept= 1.000000
+# R = 1.000000
+
+plt.figure(figsize=(15, 5))
+plt.plot(x, y, 'o', label='original data')
+plt.plot(x, intercept + slope * x, 'r', label='fitted line')
+plt.legend()
+plt.grid()
+plt.show()
 
