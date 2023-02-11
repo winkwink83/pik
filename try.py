@@ -28,8 +28,8 @@ n = 1  # number of points to be checked before and after
 test['min'] = test.iloc[argrelextrema(test.Close.values, np.less_equal,order=n)[0]]['Close']
 test['max'] = test.iloc[argrelextrema(test.Close.values, np.greater_equal,order=n)[0]]['Close']
 
-print(type(int(test['Volume']['22895.82000000'])))
-x = []
+# print(type(int(test['Volume']['22895.82000000'])))
+# x = []
 # pobrac minima z test[min] i zapisac je do array y nizej, a do array x zapisac liczby
 # czasowe i sie wyswietli linia wsparcia
 # Plot results
@@ -46,9 +46,7 @@ y = np.array([5, 6,7,8,15])
 slope, intercept, r_value, p_value, std_err = linregress(x, y)
 print("slope: %f, intercept: %f" % (slope, intercept))
 print("R-squared: %f" % r_value ** 2)
-# slope =  2.000000
-# intercept= 1.000000
-# R = 1.000000
+
 
 plt.figure(figsize=(15, 5))
 plt.plot(x, y, 'o', label='original data')

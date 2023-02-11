@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 def techAn(cos):
-    driver = webdriver.Chrome('C:/pythonProject/chromedriver.exe')
+    driver = webdriver.Chrome('/chromedriver.exe')
     driver.get('https://www.youtube.com/')
     element = driver.find_element(By.XPATH, '//*[@id="content"]/div[2]/div[6]/div[1]/ytd-button-renderer[1]/yt-button-shape/button/yt-touch-feedback-shape/div/div[2]')
     element.click()
