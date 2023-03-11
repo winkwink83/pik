@@ -13,7 +13,7 @@ if __name__=='__main__':
     client = Client(kody.apiKey,kody.apiSecurity)
     print('logged in')
     info = client.get_account()
-geee
+
 
     root = Tk()
     root.geometry('300x250')
