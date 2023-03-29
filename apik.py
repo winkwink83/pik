@@ -1,11 +1,13 @@
 if __name__=='__main__':
     from binance.client import Client
+
     import kody
     from tkinter import *
     from pprint import pprint
     import scraps
     import google
     import pandas as pd
+
     import matplotlib_inline
 
 
@@ -49,7 +51,7 @@ if __name__=='__main__':
         for keys in saldoo:
             label = Label(wroc_frame, text=str(keys + '             ' + saldoo[keys]))
             label.pack()
-        root.geometry('300x350')
+        root.geometry('300x375')
 
 
         def wroc():
@@ -211,8 +213,8 @@ if __name__=='__main__':
                 frame = frame.astype(float)
                 return frame
             test = getminutedata('BTCUSDT','1d','1w')
-            test.plot()
-
+            print(test)
+            test.Open.plot()
 
             root.geometry('300x250')
 
@@ -233,13 +235,17 @@ if __name__=='__main__':
 
         root.geometry('350x350')
 
-        # data = pd.DataFrame(client.get_historical_klines('BTCUSDT', '1d', '1 week ago UTC'))
-        # pprint(data)
+
+
+
+    perms = (client.get_account_api_permissions())
+    if (perms['enableSpotAndMarginTrading']) == False:
+        stateOfButton = DISABLED
 
     but1 = Button(WSframe, text="Wyswietl saldo",fg='Blue',command=saldo)
-    but2 = Button(Kframe, text="Kup",command = kup)
-    but3 = Button(Sframe, text="Sprzedaj", command = sprzedaj)
-    but4 = Button(KLframe, text="Kup po wybranej cenie")
+    but2 = Button(Kframe, text="Kup",command = kup, state=stateOfButton)
+    but3 = Button(Sframe, text="Sprzedaj", command = sprzedaj, state=stateOfButton)
+    but4 = Button(KLframe, text="Kup po wybranej cenie", state=stateOfButton)
     but5 = Button(AMframe, text="Analiza mediów", command = an)
     but6 = Button(ATframe, text="Analiza techniczna", command = at)
     but1.pack()
