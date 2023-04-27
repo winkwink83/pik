@@ -112,7 +112,7 @@ plt.plot(test.get('Open'))
 # slope1, intercept1, r_value1, p_value1, std_err1 = linregress(xesmax, yma)
 # print("slope: %f, intercept: %f" % (slope, intercept))
 # print("R-squared: %f" % r_value ** 2)
-#
+
 # print("slope1: %f, intercept1: %f" % (slope1, intercept1))
 # print("R-squared1: %f" % r_value1 ** 2)
 #

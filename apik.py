@@ -8,7 +8,6 @@ if __name__=='__main__':
     import google
     import pandas as pd
 
-    import matplotlib_inline
 
     client = Client(kody.apiKey,kody.apiSecurity)
     print('logged in')
