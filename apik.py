@@ -10,12 +10,9 @@ if __name__=='__main__':
 
     import matplotlib_inline
 
-
-
     client = Client(kody.apiKey,kody.apiSecurity)
     print('logged in')
     info = client.get_account()
-
 
     root = Tk()
     root.geometry('300x250')
@@ -33,8 +30,6 @@ if __name__=='__main__':
     AMframe.pack(pady= 5)
     ATframe = Frame(root)
     ATframe.pack(pady= 5)
-
-
 
     def saldo():
         wroc_frame = Frame(WSframe,background='red')
@@ -66,8 +61,6 @@ if __name__=='__main__':
 
 
     from functools import partial
-
-
     def exit(root):
         root.destroy()
     wyjdz = partial(exit,root)
@@ -241,6 +234,8 @@ if __name__=='__main__':
     perms = (client.get_account_api_permissions())
     if (perms['enableSpotAndMarginTrading']) == False:
         stateOfButton = DISABLED
+    else:
+        stateOfButton = ACTIVE
 
     but1 = Button(WSframe, text="Wyswietl saldo",fg='Blue',command=saldo)
     but2 = Button(Kframe, text="Kup",command = kup, state=stateOfButton)
@@ -260,7 +255,6 @@ if __name__=='__main__':
 
 
 
-# order = client.create_order(symbol = 'EURUSDT',side = SIDE_SELL,type = ORDER_TYPE_MARKET,quantity=20)
 
 
 
