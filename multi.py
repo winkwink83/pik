@@ -1,4 +1,3 @@
-print('gienek')
 def dnr(pr1,pr2,arg):
     import multiprocessing
     p1 = multiprocessing.Process(target=pr1,args=(arg,))
